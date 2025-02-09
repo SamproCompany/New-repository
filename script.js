@@ -1,2 +1,3 @@
+const crypto = require("crypto");
 const key = Buffer.from(process.env.ENCRYPTION_KEY, "hex");
 console.log(key)
