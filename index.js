@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 
 // Endpoint, który zwraca zmienną ENCRYPTION_KEY
 app.get('/config', (req, res) => {
-  res.json({ encryptionKey: process.env.ENCRYPTION_KEY });
+  res.json({ encriptionKey: process.env.ENCRIPTION_KEY });
 });
 
 // Ustawienie portu, na którym nasłuchuje serwer
