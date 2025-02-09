@@ -3,26 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend</title>
+  <title>Frontend with Railway Environment Variable</title>
 </head>
 <body>
-  <h1>Frontend</h1>
-  <script type="module">
-    // Fetch request to the backend
-    fetch("https://new-repository-production.up.railway.app/")  // Backend URL z Railway
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((env) => {
-        const key = Buffer.from(env.ENCRYPTION_KEY, "hex");
-        console.log(key);
-      })
-      .catch((error) => {
-        console.error("Fetch error: ", error);
-      });
-  </script>
+  <h1>API URL from Railway</h1>
+  <p id="api-url">Loading...</p>
+
+  <script src="index.js"></script>
 </body>
 </html>
