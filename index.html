@@ -6,12 +6,22 @@
   <title>Frontend</title>
 </head>
 <body>
+  <h1>Frontend</h1>
   <script type="module">
-    fetch("https://new-repository-production.up.railway.app")
-      .then(res => res.json())
-      .then(env => {
+    // Fetch request to the backend
+    fetch("https://new-repository-production.up.railway.app/")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((env) => {
         const key = Buffer.from(env.ENCRYPTION_KEY, "hex");
         console.log(key);
+      })
+      .catch((error) => {
+        console.error("Fetch error: ", error);
       });
   </script>
 </body>
