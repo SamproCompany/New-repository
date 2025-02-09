@@ -27,4 +27,4 @@ jobs:
 
       - name: Deploy to Railway
         run: |
-          curl -sSL https://railway.app/api/v1/projects/${{ secrets.RAILWAY_PROJECT_ID }}/deployments -H "Authorization: Bearer ${{ secrets.RAILWAY_API_KEY }}"
+          curl -sSL https://railway.app/api/v1/projects/${{ secrets.5885946c-e87a-44cf-b10b-a4c7cd60c7e8 }}/deployments -H "Authorization: Bearer ${{ secrets.ec057a5e-a97d-419a-8c78-7bbbc140d2a6 }}"
