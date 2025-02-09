@@ -1,15 +1,21 @@
-import express from "express";
-import dotenv from "dotenv";
+import express from 'express';
+import cors from 'cors';
 
-dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.get("/get-key", (req, res) => {
-    let key = res.json({ ENCRYPTION_KEY: process.env.ENCRYPTION_KEY });
-    console.log(key)
+// Zezwól na dostęp z konkretnej domeny (np. github.io)
+const corsOptions = {
+  origin: 'https://samprocompany.github.io', // Zmień na swoją domenę
+  methods: 'GET', // Dopuszczone metody HTTP
+};
+
+app.use(cors(corsOptions));
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Hello from backend' });
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
