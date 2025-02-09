@@ -1,9 +1,9 @@
-window.onload = function () {
-  // Zmienna API_URL jest teraz dynamicznie wstawiana przez GitHub Actions
-  const apiUrl = '';
-  if (apiUrl) {
-    document.getElementById('api-url').innerText = `API URL: ${apiUrl}`;
-  } else {
-    document.getElementById('api-url').innerText = "API URL not set.";
+window.onload = async function () {
+  try {
+    const response = await fetch('/config'); // Pobiera ENCRYPTION_KEY z backendu
+    const data = await response.json();
+    document.getElementById('api-url').innerText = `ENCRYPTION KEY: ${data.encryptionKey}`;
+  } catch (error) {
+    document.getElementById('api-url').innerText = "Error fetching ENCRYPTION_KEY.";
   }
 };
