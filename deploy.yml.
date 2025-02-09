@@ -1,0 +1,30 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      # Tworzymy zmienną środowiskową w Railway i wykonujemy deploy
+      - name: Set Railway Environment Variable
+        run: echo "API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
+
+      - name: Deploy to Railway
+        run: |
+          curl -sSL https://railway.app/api/v1/projects/${{ secrets.RAILWAY_PROJECT_ID }}/deployments -H "Authorization: Bearer ${{ secrets.RAILWAY_API_KEY }}"
