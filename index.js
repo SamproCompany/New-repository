@@ -1,6 +1,6 @@
-// Pobieramy zmienną środowiskową z Railway (wstrzykniemy ją podczas deploy)
 window.onload = function () {
-  const apiUrl = process.env.API_URL; // Zmienna środowiskowa Railway
+  // Zmienna API_URL jest teraz dynamicznie wstawiana przez GitHub Actions
+  const apiUrl = '';
   if (apiUrl) {
     document.getElementById('api-url').innerText = `API URL: ${apiUrl}`;
   } else {
