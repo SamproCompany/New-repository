@@ -3,12 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend with Railway Environment Variable</title>
+  <title>Firebase Upload</title>
 </head>
 <body>
- <h1>Encryption Key from Railway</h1>
-<p id="api-url">Loading...</p>
-<script src="index.js"></script>
+  <input type="file" id="fileInput" />
+  <button id="uploadButton">Upload</button>
+  <script src="https://samprocompany.github.io/New-repository/func.js"></script>
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import Firebase functions from the modular SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
+    // Your web app's Firebase configuration
+    let a = ""
+    fetch(a)
+    .then(response => response.json())
+    .then(data => {
+      let firebaseConfig = {};
+      firebaseConfig = data;
+      aftergetting(firebaseConfig)
+    })
+    function aftergetting(a){
+      let firebaseConfig = {};
+      firebaseConfig = a
 
+      // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    // Reference to the file input and button
+    const fileInput = document.getElementById("fileInput");
+    const uploadButton = document.getElementById("uploadButton");
+
+    // Upload file to Firebase Storage when the button is clicked
+    uploadButton.addEventListener("click", () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const storageRef = ref(storage, "uploads/" + "ABCDEFG"); // Correct reference to storage path
+
+        uploadBytes(storageRef, file).then(() => {
+          console.log("File uploaded successfully");
+
+          // Get the download URL for the uploaded file
+          getDownloadURL(storageRef).then((url) => {
+            console.log(`Download URL: ${url}`);
+          });
+        }).catch((error) => {
+          console.error("Error uploading file:", error);
+        });
+      } else {
+        console.log("No file selected");
+      }
+    });
+    }
+  </script>
 </body>
 </html>
