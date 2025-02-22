@@ -14,31 +14,32 @@
   // Import the required Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import { signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 // Initialize Firebase with only the API key
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app-check.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+const auth = getAuth();
+signInAnonymously(auth)
+  .then(() => {
 
 const app = initializeApp({ 
   apiKey: "AIzaSyDmskKnq1EWweD8Q2Y7r6KrDb6wpn-4wog",
-  authDomain: "samprocompany.github.io",
   databaseURL: "https://upload-8029e-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "upload-8029e",
   storageBucket: "upload-8029e.appspot.com",
   messagingSenderId: "104149058285",
   appId: "1:104149058285:web:e32236f6674994e671c2e4"
 });
-const auth = getAuth(app);
+
 const storage = getStorage(app);
-
-
-signInAnonymously(auth)
-  .then(() => {
-    console.log("User signed in anonymously");
-  })
-  .catch((error) => {
-    console.error("Error signing in anonymously:", error.message);
-  });
-// Reference to the file input and button
+  // Inicjalizacja App Check
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider('6LcfmN8qAAAAAPP4vIJgV3wMu1L3JJVjRp2TZOB6'),
+      isTokenAutoRefreshEnabled: true
+    });
+    console.log("Zalogowano anonimowo");
+    // Tutaj możesz kontynuować z przesyłaniem pliku
+    // Reference to the file input and button
 const fileInput = document.getElementById("fileInput");
 const uploadButton = document.getElementById("uploadButton");
 
@@ -62,6 +63,13 @@ uploadButton.addEventListener("click", () => {
     console.log("Nie wybrano pliku");
   }
 });
+
+  })
+  .catch((error) => {
+    console.error("Błąd logowania anonimowego:", error);
+  });
+
+
 
   </script>
 </body>
