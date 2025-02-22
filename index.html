@@ -15,16 +15,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
 
-// Initialize Firebase with only the API key
-const app = initializeApp({ 
-apiKey: "AIzaSyDhI16Xjc4H8JGNO7wtf1nKThNDyFMAXt8",
-authDomain: "upload-8029e.firebaseapp.com",
-databaseURL: "https://upload-8029e-default-rtdb.europe-west1.firebasedatabase.app",
-projectId: "upload-8029e",
-storageBucket: "upload-8029e.appspot.com",
-messagingSenderId: "104149058285",
-appId: "1:104149058285:web:e32236f6674994e671c2e4" });
-const storage = getStorage(app);
 
 // Reference to the file input and button
 const fileInput = document.getElementById("fileInput");
