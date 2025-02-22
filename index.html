@@ -13,8 +13,8 @@
   <script type="module">
   // Import the required Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
-
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+      
 // Initialize Firebase with only the API key
 
 const app = initializeApp({ 
@@ -25,7 +25,10 @@ const app = initializeApp({
   messagingSenderId: "104149058285",
   appId: "1:104149058285:web:e32236f6674994e671c2e4"
 });
-
+const db = getDatabase(app);
+set(ref(db, 'apiKey'), {
+  context: 'upload-8029e.appspot.com'
+});
 const storage = getStorage(app);
 // Reference to the file input and button
 const fileInput = document.getElementById("fileInput");
