@@ -15,6 +15,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import { signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 // Initialize Firebase with only the API key
 
 const app = initializeApp({ 
@@ -29,6 +31,13 @@ const app = initializeApp({
 const auth = getAuth(app);
 const storage = getStorage(app);
 
+signInAnonymously(auth)
+  .then(() => {
+    console.log("User signed in anonymously");
+  })
+  .catch((error) => {
+    console.error("Error signing in anonymously:", error.message);
+  });
 // Reference to the file input and button
 const fileInput = document.getElementById("fileInput");
 const uploadButton = document.getElementById("uploadButton");
