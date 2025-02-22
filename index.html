@@ -8,14 +8,13 @@
 <body>
   <input type="file" id="fileInput" />
   <button id="uploadButton">Upload</button>
-  <script src="https://samprocompany.github.io/New-repository/func.js"></script>
-  <!-- Firebase SDK -->
+
   <script type="module">
   // Import the required Firebase functions
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
 
- // Initialize Firebase with your configuration
+  // Initialize Firebase with your configuration
   const app = initializeApp({ 
     apiKey: "AIzaSyDhI16Xjc4H8JGNO7wtf1nKThNDyFMAXt8",
     authDomain: "upload-8029e.firebaseapp.com",
@@ -24,31 +23,35 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
     messagingSenderId: "104149058285",
     appId: "1:104149058285:web:e32236f6674994e671c2e4"
   });
-// Reference to the file input and button
-const fileInput = document.getElementById("fileInput");
-const uploadButton = document.getElementById("uploadButton");
 
-// Upload file to Firebase Storage when the button is clicked
-uploadButton.addEventListener("click", () => {
-  const file = fileInput.files[0];
-  if (file) {
-    const storageRef = ref(storage, "uploads/" + "ABCDEFG");
+  const storage = getStorage(app);
 
-    uploadBytes(storageRef, file).then(() => {
-      console.log("Plik został pomyślnie przesłany");
+  // Reference to the file input and button
+  const fileInput = document.getElementById("fileInput");
+  const uploadButton = document.getElementById("uploadButton");
 
-      // Get the download URL for the uploaded file
-      getDownloadURL(storageRef).then((url) => {
-        console.log(`URL do pobrania: ${url}`);
+  // Upload file to Firebase Storage when the button is clicked
+  uploadButton.addEventListener("click", () => {
+    const file = fileInput.files[0];
+    if (file) {
+      // Generate a unique filename using timestamp
+      const filename = `${Date.now()}_${file.name}`;
+      const storageRef = ref(storage, "uploads/" + filename);
+
+      uploadBytes(storageRef, file).then(() => {
+        console.log("Plik został pomyślnie przesłany");
+
+        // Get the download URL for the uploaded file
+        getDownloadURL(storageRef).then((url) => {
+          console.log(`URL do pobrania: ${url}`);
+        });
+      }).catch((error) => {
+        console.error("Błąd podczas przesyłania pliku:", error);
       });
-    }).catch((error) => {
-      console.error("Błąd podczas przesyłania pliku:", error);
-    });
-  } else {
-    console.log("Nie wybrano pliku");
-  }
-});
-
+    } else {
+      console.log("Nie wybrano pliku");
+    }
+  });
   </script>
 </body>
 </html>
