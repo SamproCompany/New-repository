@@ -13,21 +13,24 @@
   <script type="module">
   // Import the required Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
-      
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-app-check.js';
 // Initialize Firebase with only the API key
 
-const app = initializeApp({ 
+const firebaseConfig = {
   apiKey: "AIzaSyDmskKnq1EWweD8Q2Y7r6KrDb6wpn-4wog",
+  authDomain: "upload-8029e.firebaseapp.com",
   databaseURL: "https://upload-8029e-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "upload-8029e",
   storageBucket: "upload-8029e.appspot.com",
   messagingSenderId: "104149058285",
   appId: "1:104149058285:web:e32236f6674994e671c2e4"
-});
-const db = getDatabase(app);
-set(ref(db, 'apiKey'), {
-  context: 'upload-8029e.appspot.com'
+};
+
+const app = initializeApp(firebaseConfig);
+initializeAppCheck(app, {
+  provider: new ReCaptchaEnterpriseProvider("6LddJ-AqAAAAAEH_JuQMpW3CJwlReo-C4Ix6y_sh"),
+  isTokenAutoRefreshEnabled: true
 });
 const storage = getStorage(app);
 // Reference to the file input and button
