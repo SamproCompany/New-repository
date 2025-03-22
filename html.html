@@ -17,7 +17,7 @@ async function insertUser() {
     const { data, error } = await supabase
         .from('id')
         .insert([{ name: 'Bob', age: 30 }]);
-
+        console.log("Inserted");
     if (error) {
         console.error('Insert error:', error);
     } else {
