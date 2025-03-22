@@ -16,7 +16,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 async function insertUser() {
     const { data, error } = await supabase
         .from('id')
-        .insert([{ name: 'Bob', age: 30 }]);
+        .insert([{ name: 'Bob'}]);
         console.log("Inserted");
     if (error) {
         console.error('Insert error:', error);
